@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 namespace EventManager
@@ -12,6 +13,11 @@ namespace EventManager
         private static EventManager _instance;
 
         private void Awake()
+        {
+            Init();
+        }
+
+        private void Init()
         {
             if(_instance == null)
             {
@@ -32,41 +38,46 @@ namespace EventManager
             }
         }
 
-        private Dictionary<Type, Action<IEventMessage>> subscribedEvents = new Dictionary<Type, Action<IEventMessage>>();
-        private List<IEventMessage> eventsRevieved = new List<IEventMessage>();
+        private static Dictionary<Type, Action<IEventMessage>> subscribedEvents = new Dictionary<Type, Action<IEventMessage>>();
+        private static Queue<IEventMessage> eventsRevieved = new Queue<IEventMessage>();
         public static void SubscribeMessage(Type messageType, Action<IEventMessage> action)
-        {
-            if (_instance.subscribedEvents.ContainsKey(messageType))
+        {           
+
+            if (subscribedEvents.ContainsKey(messageType))
             {
-                _instance.subscribedEvents[messageType] += action;
+                subscribedEvents[messageType] += action;
             }
-            _instance.subscribedEvents.Add(messageType, action);
+            subscribedEvents.Add(messageType, action);
         }
 
         public static void UnSubscribeMessage(Type messageType, Action<IEventMessage> action)
         {
-            if (_instance.subscribedEvents.ContainsKey(messageType))
+            if (_instance == null)
+                return;
+
+            if (subscribedEvents.ContainsKey(messageType))
             {
-                _instance.subscribedEvents[messageType] -= action;
+                subscribedEvents[messageType] -= action;
             }            
         }
 
         public static void SendMessage(IEventMessage message)
         {
-            _instance.eventsRevieved.Add(message);
+            eventsRevieved.Enqueue(message);
         }
 
         private void Update()
         {
             if (eventsRevieved.Count == 0)  return;
 
-            foreach (IEventMessage message in eventsRevieved)
+            while(eventsRevieved.Count > 0)
             {
-                if(subscribedEvents.ContainsKey(message.GetType()))
+                var message = eventsRevieved.Dequeue();               
+                if (subscribedEvents.ContainsKey(message.GetType()))
+                {                    
                     subscribedEvents[message.GetType()]?.Invoke(message);
-            }     
-            
-            eventsRevieved.Clear();           
+                }
+            }      
         }
     }
 }

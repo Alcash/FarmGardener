@@ -1,4 +1,5 @@
-using GameData;
+using FarmCore;
+using FarmCore.Plants.GameData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
