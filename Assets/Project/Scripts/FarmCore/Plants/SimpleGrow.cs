@@ -16,6 +16,8 @@ namespace FarmCore.Plants
 
         public float GrowValue => _growTimer / _growTimeEnd;
 
+        public float GrowTimeCountDown => _growTimeEnd - _growTimer;
+
         private GameObject _view;
 
         public SimpleGrow(PlantData plantData)

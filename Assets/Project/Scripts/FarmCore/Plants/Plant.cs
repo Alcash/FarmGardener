@@ -18,6 +18,8 @@ namespace FarmCore.Plants
 
         public bool IsGrowEnd => _isGrowed;
 
+        public IGrowing Growing => _growing;
+
         public Plant(PlantData plantData, IGrowing growing, IHarvest harvest)
         {
             _plantData = plantData;

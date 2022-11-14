@@ -8,12 +8,12 @@ namespace EventManager
 {
     public class PlantSelectMessage : IEventMessage
     {
-        public PlantData plant { get; private set; }
-        public FarmCell cell { get; private set; }
+        public PlantData Plant { get; private set; }
+        public FarmCell Cell { get; private set; }
         public PlantSelectMessage(FarmCell farmCell,PlantData plantData)
         {
-            plant = plantData;
-            cell = farmCell;
+            Plant = plantData;
+            Cell = farmCell;
         }
     }
 }

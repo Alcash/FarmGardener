@@ -1,10 +1,11 @@
 using EventManager;
+using FarmCore;
 using FarmCore.Plants.GameData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FarmCore
+namespace UI
 {
     public class CellSelectorManager : MonoBehaviour
     {
@@ -19,13 +20,13 @@ namespace FarmCore
         {
             if (clickMessage is CellClickMessage message)
             {
-                _selectedCell = message.cell;
-                if (message.cell.HasPlant == false)
+                _selectedCell = message.Cell;
+                if (message.Cell.HasPlant == false)
                 {                    
                     m_PlantSelector.gameObject.SetActive(true);
-                    m_PlantSelector.transform.position = Camera.main.WorldToScreenPoint(message.cell.transform.position);
+                    m_PlantSelector.transform.position = _mainCamera.WorldToScreenPoint(message.Cell.transform.position);
                 }
-                if (message.cell.HasPlant && message.cell.Plant.IsGrowEnd)
+                if (message.Cell.HasPlant && message.Cell.Plant.IsGrowEnd)
                 {
                     EventManager.EventManager.SendMessage(new PlantHarvestMessage(_selectedCell));
                 }

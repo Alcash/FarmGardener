@@ -10,7 +10,7 @@ namespace FarmCore.Plants
         float GrowValue { get; }
         void GrowTick(float deltaTime);
         event Action GrowComplete;
-
         void SetGameObject(GameObject gameObject);
+        float GrowTimeCountDown { get; }
     }
 }

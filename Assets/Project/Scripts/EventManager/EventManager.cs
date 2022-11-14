@@ -41,13 +41,14 @@ namespace EventManager
         private static Dictionary<Type, Action<IEventMessage>> subscribedEvents = new Dictionary<Type, Action<IEventMessage>>();
         private static Queue<IEventMessage> eventsRevieved = new Queue<IEventMessage>();
         public static void SubscribeMessage(Type messageType, Action<IEventMessage> action)
-        {           
+        {
 
             if (subscribedEvents.ContainsKey(messageType))
             {
                 subscribedEvents[messageType] += action;
             }
-            subscribedEvents.Add(messageType, action);
+            else
+                subscribedEvents.Add(messageType, action);
         }
 
         public static void UnSubscribeMessage(Type messageType, Action<IEventMessage> action)
