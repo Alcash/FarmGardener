@@ -1,13 +1,17 @@
 
+using System;
 using UnityEngine;
 
 namespace FarmCore.Plants
 {
     public interface IPlant
     {
-        GameObject CreateView(Vector3 position);
+        bool IsGrowEnd { get; }
+        GameObject CreateView();
         void Harvest();
         void GrowTick(float deltaTime);
+
+
 
     }
 }

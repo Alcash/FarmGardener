@@ -7,5 +7,6 @@ namespace FarmCore.Plants
     public interface IHarvest
     {       
         void Harvest();
+        void SetGameObject(GameObject gameObject);
     }
 }
