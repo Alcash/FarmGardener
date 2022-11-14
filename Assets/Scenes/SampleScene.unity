@@ -748,14 +748,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.48320413, y: 0.00052235427, z: -0.00028852758, w: -0.87550753}
-  m_LocalPosition: {x: 0.109406956, y: 6.1549673, z: -3.1809912}
+  m_LocalRotation: {x: 0.54280806, y: 0, z: 0, w: 0.8398568}
+  m_LocalPosition: {x: 0.109406956, y: 5.32, z: -2.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 65.75, y: 0, z: 0}
 --- !u!1 &1071975140 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8809893372981957376, guid: cad6cc4bbd9b0d94f80aa27a16cfd3cd, type: 3}
@@ -873,6 +873,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Image: {fileID: 93366107}
   m_Button: {fileID: 93366109}
+--- !u!1 &1805399590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1805399592}
+  - component: {fileID: 1805399591}
+  m_Layer: 0
+  m_Name: FarmWorker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1805399591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805399590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd667eeecd23a3c458601f43c6500322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1805399592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805399590}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.09861, y: 14.439026, z: -119.63435}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1922563214
 GameObject:
   m_ObjectHideFlags: 0

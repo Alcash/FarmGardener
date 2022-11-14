@@ -9,20 +9,23 @@ namespace FarmCore.Plants
     {
         public static IPlant Create(PlantData plantData)
         {
-            var plant = new Plant(plantData);
+            IPlant plant = null;
             switch (plantData.PlantType)
-            {
-                case PlantsEnum.Carrot:                    
-                    plant.SetGrowing(new SimpleGrow());
-                    plant.SetHarvest(new HarvestWithReward());
+            {                
+                case PlantsEnum.Carrot:
+                    plant = new Plant(plantData,
+                           new SimpleGrow(plantData),
+                           new HarvestWithReward(plantData));
                     break;
-                case PlantsEnum.Grass:                   
-                    plant.SetGrowing(new SimpleGrow());
-                    plant.SetHarvest(new HarvestWithReward());
+                case PlantsEnum.Grass:
+                    plant = new Plant(plantData,
+                           new SimpleGrow(plantData),
+                           new HarvestWithReward(plantData));
                     break;
-                case PlantsEnum.Tree:                   
-                    plant.SetGrowing(new SimpleGrow());
-                    plant.SetHarvest(new HarvestWithReward());
+                case PlantsEnum.Tree:     
+                     plant = new Plant(plantData,
+                          new SimpleGrow(plantData),
+                          new HarvestWithReward(plantData));
                     break;
                 default:
                     return null;

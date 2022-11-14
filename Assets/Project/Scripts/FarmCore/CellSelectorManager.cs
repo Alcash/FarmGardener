@@ -20,14 +20,20 @@ namespace FarmCore
             if (clickMessage is CellClickMessage message)
             {
                 _selectedCell = message.cell;
-                m_PlantSelector.gameObject.SetActive(true);
-                m_PlantSelector.transform.position = Camera.main.WorldToScreenPoint(message.cell.transform.position);
+                if (message.cell.HasPlant == false)
+                {                    
+                    m_PlantSelector.gameObject.SetActive(true);
+                    m_PlantSelector.transform.position = Camera.main.WorldToScreenPoint(message.cell.transform.position);
+                }
+                if (message.cell.HasPlant && message.cell.Plant.IsGrowEnd)
+                {
+                    EventManager.EventManager.SendMessage(new PlantHarvestMessage(_selectedCell));
+                }
             }
         }
 
         private void PlantSelect(PlantData plantData)
-        {
-            Debug.Log($"PlantSelect");
+        {            
             m_PlantSelector.gameObject.SetActive(false);
             EventManager.EventManager.SendMessage(new PlantSelectMessage(_selectedCell, plantData));
         }

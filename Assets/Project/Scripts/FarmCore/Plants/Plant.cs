@@ -14,37 +14,44 @@ namespace FarmCore.Plants
 
         private IGrowing _growing;
         private IHarvest _harvest;
+        private bool _isGrowed;
 
-        public Plant(PlantData plantData)
+        public bool IsGrowEnd => _isGrowed;
+
+        public Plant(PlantData plantData, IGrowing growing, IHarvest harvest)
         {
             _plantData = plantData;
-            _growing = new SimpleGrow();
-            _harvest = new HarvestWithReward();
-        }
-
-        public void SetHarvest(IHarvest harvest)
-        {
-            _harvest = harvest;
-        }
-
-        public void SetGrowing(IGrowing growing)
-        {
             _growing = growing;
-        }
+           
+            _harvest = harvest;
+            _isGrowed = false;
+            _growing.GrowComplete += OnGrowComplete;
+        }   
 
-        public GameObject CreateView(Vector3 position)
+        public GameObject CreateView()
         {
-            return _instView = GameObject.Instantiate(_plantData.View3d, position, Quaternion.identity);
+            _instView = GameObject.Instantiate(_plantData.View3d);
+            _growing.SetGameObject(_instView);
+            _harvest.SetGameObject(_instView);
+            return _instView;
         }        
 
         public void GrowTick(float deltaTime)
         {
-            _growing.GrowTick(deltaTime);
+            if(_isGrowed == false)
+            {
+                _growing.GrowTick(deltaTime);               
+            }                    
         }
 
         public void Harvest()
         {
             _harvest.Harvest();
+        }
+
+        private void OnGrowComplete()
+        {
+            _isGrowed = true;
         }
     }
 }
