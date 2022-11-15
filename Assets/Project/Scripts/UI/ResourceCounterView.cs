@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceCounterView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Image m_Image;
+    public Image Image => m_Image;
+    [SerializeField] private Text m_Text;
+    public Text Text => m_Text;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

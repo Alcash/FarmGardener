@@ -3,11 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace FarmCore.Plants
 {
-    public class SimpleGrow : IGrowing
+    public class EndlessGrow : IGrowing
     {
         private bool _growEnd;
         private float _growTimer = 0;
@@ -19,11 +18,11 @@ namespace FarmCore.Plants
 
         public float GrowTimeCountDown => _growTimeEnd - _growTimer;
 
-        public bool IsGrowEnd => _growEnd;
+        public bool IsGrowEnd => false;
 
         private GameObject _view;
 
-        public SimpleGrow(PlantData plantData)
+        public EndlessGrow(PlantData plantData)
         {
             _growTimeEnd = plantData.GrowTime;
             _growEnd = false;
@@ -36,11 +35,11 @@ namespace FarmCore.Plants
                 _growTimer += deltaTime;
                 _view.transform.localScale = Vector3.one * GrowValue;
             }
-            else if(IsGrowEnd == false)
+            else if (_growEnd == false)
             {
                 _growEnd = true;
                 _growTimer = _growTimeEnd;
-                GrowComplete?.Invoke();                
+                GrowComplete?.Invoke();
             }
         }
 

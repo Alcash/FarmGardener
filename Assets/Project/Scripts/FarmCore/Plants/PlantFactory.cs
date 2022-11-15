@@ -20,12 +20,12 @@ namespace FarmCore.Plants
                 case PlantsEnum.Grass:
                     plant = new Plant(plantData,
                            new SimpleGrow(plantData),
-                           new HarvestWithReward(plantData));
+                           new HarvestExp(plantData));
                     break;
                 case PlantsEnum.Tree:     
                      plant = new Plant(plantData,
-                          new SimpleGrow(plantData),
-                          new HarvestWithReward(plantData));
+                          new EndlessGrow(plantData),
+                          new HarvestExp(plantData));
                     break;
                 default:
                     return null;
