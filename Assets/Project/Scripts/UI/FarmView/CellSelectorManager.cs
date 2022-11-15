@@ -49,7 +49,6 @@ namespace UI.FarmView
         private void OnEnable()
         {
             EventManager.EventManager.SubscribeMessage(typeof(CellClickMessage), CellClickHandler);
-
         }
 
         private void OnDisable()
