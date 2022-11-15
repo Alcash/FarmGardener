@@ -2,7 +2,7 @@ using FarmCore.Plants.GameData;
 using System;
 using UnityEngine;
 
-namespace UI
+namespace UI.FarmView
 {
     public class PlantSelectorView : MonoBehaviour
     {

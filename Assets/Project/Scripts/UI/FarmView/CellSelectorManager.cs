@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UI
+namespace UI.FarmView
 {
     public class CellSelectorManager : MonoBehaviour
     {
@@ -26,7 +26,7 @@ namespace UI
                     m_PlantSelector.gameObject.SetActive(true);
                     m_PlantSelector.transform.position = _mainCamera.WorldToScreenPoint(message.Cell.transform.position);
                 }
-                if (message.Cell.HasPlant && message.Cell.Plant.IsGrowEnd)
+                if (message.Cell.HasPlant && message.Cell.Plant.Growing.IsGrowEnd)
                 {
                     EventManager.EventManager.SendMessage(new PlantHarvestMessage(_selectedCell));
                 }

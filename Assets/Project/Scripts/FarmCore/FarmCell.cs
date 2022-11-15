@@ -26,9 +26,9 @@ namespace FarmCore
 
         private void FixedUpdate()
         {
-            if(_plant != null && _plant.IsGrowEnd == false)
+            if(_plant != null && _plant.Growing.IsGrowEnd == false)
             {
-                _plant.GrowTick(Time.fixedDeltaTime);
+                _plant.Growing.GrowTick(Time.fixedDeltaTime);
             }
         }
 

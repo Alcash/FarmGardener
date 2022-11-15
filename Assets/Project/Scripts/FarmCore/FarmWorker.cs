@@ -55,7 +55,7 @@ namespace FarmCore
 
         private void HarvestPlant(PlantHarvestMessage plantMessage)
         {
-            plantMessage.Cell.Plant.Harvest();
+            plantMessage.Cell.Plant.Harvesting.Harvest();
         }
 
         private void OnEnable()

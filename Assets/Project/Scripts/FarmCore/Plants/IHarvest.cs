@@ -5,7 +5,8 @@ using UnityEngine;
 namespace FarmCore.Plants
 {
     public interface IHarvest
-    {       
+    {           
+        bool IsCanHarvest { get; }
         void Harvest();
         void SetGameObject(GameObject gameObject);
     }

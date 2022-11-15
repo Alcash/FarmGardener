@@ -20,6 +20,9 @@ namespace FarmCore.Plants
             public float GrowTime => m_GrowTime;
             [SerializeField] private float m_ExpForGrow;
             public float ExpForGrow => m_ExpForGrow;
+
+            [SerializeField] private bool m_IsCanHarvest;
+            public bool IsCanHarvest => m_IsCanHarvest;
         }
     }
 }

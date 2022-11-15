@@ -5,7 +5,7 @@ using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace UI.FarmView
 {
     public class PlantGrowView : MonoBehaviour
     {

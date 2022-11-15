@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
-namespace UI
+namespace UI.FarmView
 {
     public class PlantGrowViewManager : MonoBehaviour
     {

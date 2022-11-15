@@ -7,6 +7,7 @@ namespace FarmCore.Plants
 {
     public interface IGrowing
     {
+        bool IsGrowEnd { get; }
         float GrowValue { get; }
         void GrowTick(float deltaTime);
         event Action GrowComplete;

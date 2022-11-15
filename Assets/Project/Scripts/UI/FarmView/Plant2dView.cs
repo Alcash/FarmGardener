@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace UI.FarmView
 {
     public class Plant2dView : MonoBehaviour
     {
