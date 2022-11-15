@@ -18,14 +18,16 @@ namespace FarmCore.Plants
 
         public bool IsGrowEnd => _isGrowed;
 
+        public IGrowing Growing => _growing;
+        public IHarvest Harvesting => _harvest;
+
         public Plant(PlantData plantData, IGrowing growing, IHarvest harvest)
         {
             _plantData = plantData;
             _growing = growing;
            
             _harvest = harvest;
-            _isGrowed = false;
-            _growing.GrowComplete += OnGrowComplete;
+            _isGrowed = false;            
         }   
 
         public GameObject CreateView()
@@ -34,24 +36,6 @@ namespace FarmCore.Plants
             _growing.SetGameObject(_instView);
             _harvest.SetGameObject(_instView);
             return _instView;
-        }        
-
-        public void GrowTick(float deltaTime)
-        {
-            if(_isGrowed == false)
-            {
-                _growing.GrowTick(deltaTime);               
-            }                    
-        }
-
-        public void Harvest()
-        {
-            _harvest.Harvest();
-        }
-
-        private void OnGrowComplete()
-        {
-            _isGrowed = true;
-        }
+        }  
     }
 }

@@ -16,6 +16,10 @@ namespace FarmCore.Plants
 
         public float GrowValue => _growTimer / _growTimeEnd;
 
+        public float GrowTimeCountDown => _growTimeEnd - _growTimer;
+
+        public bool IsGrowEnd => GrowValue >= 1;
+
         private GameObject _view;
 
         public SimpleGrow(PlantData plantData)
@@ -33,7 +37,7 @@ namespace FarmCore.Plants
             }
             else
             {
-                GrowComplete?.Invoke();                
+                _growTimer = _growTimeEnd;
             }
         }
 

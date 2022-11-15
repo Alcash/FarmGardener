@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace FarmCore
 {
@@ -16,11 +17,30 @@ namespace FarmCore
         public bool HasPlant => _plantView != null;
 
         private void OnMouseDown()
-        {           
-           EventManager.EventManager.SendMessage(new CellClickMessage(this));   
+        {
+            if (EventSystem.current.IsPointerOverGameObject() == false)
+            {
+                EventManager.EventManager.SendMessage(new CellClickMessage(this));
+            }
+        }        
+
+        private void FixedUpdate()
+        {
+            if(_plant != null && _plant.Growing.IsGrowEnd == false)
+            {
+                _plant.Growing.GrowTick(Time.fixedDeltaTime);
+            }
         }
 
-        public void PutPlant(IPlant plant)
+        private void PutPlantHandler(IEventMessage eventMessage)
+        {
+            if (eventMessage is FarmCellPlantedMessage plantedMessage && plantedMessage.Cell == this)
+            {
+                PutPlant(plantedMessage.Plant);
+            }
+        }
+
+        private void PutPlant(IPlant plant)
         {
             _plant = plant;
             _plantView = _plant.CreateView();
@@ -28,12 +48,14 @@ namespace FarmCore
             _plantView.transform.localPosition = Vector3.zero;
         }
 
-        private void FixedUpdate()
+        private void OnEnable()
         {
-            if(_plant != null && _plant.IsGrowEnd == false)
-            {
-                _plant.GrowTick(Time.fixedDeltaTime);
-            }
+            EventManager.EventManager.SubscribeMessage(typeof(FarmCellPlantedMessage), PutPlantHandler);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.EventManager.UnSubscribeMessage(typeof(FarmCellPlantedMessage), PutPlantHandler);
         }
     }
 }
