@@ -4,17 +4,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace FarmCore
 {
     public class FarmWorker : MonoBehaviour
     {
 
+        [SerializeField] private float m_CellNearDistance = 0.3f;
+        [SerializeField] private NavMeshAgent m_NavAgent;
+        private Coroutine _jobCoroutine;
         private void PlantCellInteract(IEventMessage message)
         {
             if (message is PlantSelectMessage plantMessage)
             {
-                StartCoroutine(MoveToFarmInteract(plantMessage.Cell,
+                if(_jobCoroutine != null)
+                {
+                    StopCoroutine(_jobCoroutine);
+                }
+                _jobCoroutine = StartCoroutine(MoveToFarmInteract(plantMessage.Cell,
                     () =>
                     {
                         PutPlant(plantMessage);
@@ -29,7 +37,11 @@ namespace FarmCore
         {
             if (message is PlantHarvestMessage plantMessage)
             {
-                StartCoroutine(MoveToFarmInteract(plantMessage.Cell,
+                if (_jobCoroutine != null)
+                {
+                    StopCoroutine(_jobCoroutine);
+                }
+                _jobCoroutine = StartCoroutine(MoveToFarmInteract(plantMessage.Cell,
                     () =>
                     {
                         HarvestPlant(plantMessage);
@@ -40,9 +52,20 @@ namespace FarmCore
         }
 
         private IEnumerator MoveToFarmInteract(FarmCell point, Action callback)
-        {
-            //moving
-            yield return null;
+        {                    
+            m_NavAgent.destination = point.transform.position;
+            m_NavAgent.isStopped = false;
+           
+            while(m_NavAgent.pathPending)
+            {
+                yield return null;
+            }
+
+            while (m_NavAgent.remainingDistance > m_CellNearDistance)
+            {
+                yield return null;
+            }
+            m_NavAgent.isStopped = true;
             callback?.Invoke();
         }
 
@@ -56,7 +79,7 @@ namespace FarmCore
         private void HarvestPlant(PlantHarvestMessage plantMessage)
         {
             plantMessage.Cell.Plant.Harvesting.Harvest();
-        }
+        }       
 
         private void OnEnable()
         {
