@@ -10,10 +10,8 @@ namespace FarmCore
         [SerializeField] private FarmCell m_CellPrefab;
 
         private FarmCell[] _spawnedCell;
-        private float _horizontalSpacing = 0.2f;
-        private float _verticalSpacing = 0.2f;
-
-        [SerializeField] private CellSelectorManager m_CellSelectorManager;
+        [SerializeField] private float _horizontalSpacing = 0.2f;
+        [SerializeField] private float _verticalSpacing = 0.2f;       
 
         private void Start()
         {
