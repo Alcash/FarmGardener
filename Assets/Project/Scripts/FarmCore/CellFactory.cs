@@ -1,3 +1,4 @@
+using EventManager;
 using System.Collections;
 using System.Collections.Generic;
 using UI.FarmView;
@@ -13,9 +14,24 @@ namespace FarmCore
         [SerializeField] private float _horizontalSpacing = 0.2f;
         [SerializeField] private float _verticalSpacing = 0.2f;       
 
-        private void Start()
+        
+
+        private void OnEnable()
         {
-            CreateFarm(5, 5);
+            EventManager.EventManager.SubscribeMessage(typeof(StartGameMessage), StartGame);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.EventManager.UnSubscribeMessage(typeof(StartGameMessage), StartGame);
+        }
+        
+        private void StartGame(IEventMessage eventMessage)
+        {
+            if(eventMessage is StartGameMessage gameMessage)
+            {
+                CreateFarm(gameMessage.Height, gameMessage.Width);
+            }
         }
 
         public void CreateFarm(int height, int width)
