@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d4b125670b238a4882e68638de73ed2, type: 3}
   m_Name: Tree
   m_EditorClassIdentifier: 
+  m_PlantType: 2
   m_View2d: {fileID: 21300000, guid: bdc0a30f2ac9399448dc2d4ecaa7e94a, type: 3}
   m_View3d: {fileID: 315958232319831415, guid: db40dda91af316e4e8c83e39b04534c7, type: 3}
   m_GrowTime: 7
   m_ExpForGrow: 10
+  m_IsCanHarvest: 0

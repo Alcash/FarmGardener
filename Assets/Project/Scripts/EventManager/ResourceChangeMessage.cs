@@ -5,7 +5,7 @@ using UnityEngine;
 namespace EventManager
 {
     public class ResourceChangeMessage : IEventMessage
-    {
+    {        
         public string Name { get; private set; }
         public float Count { get; private set; }
 
