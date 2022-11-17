@@ -2,7 +2,6 @@ using EventManager;
 using FarmCore.Plants;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,7 +12,11 @@ namespace FarmCore
 
         [SerializeField] private float m_CellNearDistance = 0.3f;
         [SerializeField] private NavMeshAgent m_NavAgent;
+        [SerializeField] private Animator m_Animator;
+        private int _walkAnimation = Animator.StringToHash("Walk");
+        private int _plantAnimation = Animator.StringToHash("Plant");
         private Coroutine _jobCoroutine;
+        private float _waitPlant = 7.6f;
         private void PlantCellInteract(IEventMessage message)
         {
             if (message is PlantSelectMessage plantMessage)
@@ -55,17 +58,28 @@ namespace FarmCore
         {                    
             m_NavAgent.destination = point.transform.position;
             m_NavAgent.isStopped = false;
-           
+            m_Animator.SetBool(_walkAnimation, true);
             while(m_NavAgent.pathPending)
             {
                 yield return null;
             }
 
             while (m_NavAgent.remainingDistance > m_CellNearDistance)
-            {
+            {    
                 yield return null;
             }
+
             m_NavAgent.isStopped = true;
+            m_Animator.SetBool(_walkAnimation, false);
+            m_Animator.SetTrigger(_plantAnimation);
+            var dir = point.transform.position - transform.position;
+            dir.y = 0;
+            var rot = Quaternion.LookRotation(dir);
+            transform.rotation = rot;
+
+            yield return new WaitForSeconds(_waitPlant);
+
+            
             callback?.Invoke();
         }
 
