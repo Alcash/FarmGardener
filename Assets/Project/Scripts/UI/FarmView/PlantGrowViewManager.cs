@@ -11,7 +11,7 @@ namespace UI.FarmView
     {
         [SerializeField] private PlantGrowView _plantGrowViewPrefab;
         private List<PlantGrowView> _simplePool = new List<PlantGrowView>();
-        private Camera _mainCamera;
+      
         private PlantGrowView GetItem()
         {
             var item = _simplePool.FirstOrDefault(x => x.gameObject.activeSelf == false);
@@ -29,15 +29,9 @@ namespace UI.FarmView
             if (eventMessage is FarmCellPlantedMessage plantedMessage)
             {
                 var view = GetItem();
-                view.transform.position = _mainCamera.WorldToScreenPoint(plantedMessage.Cell.transform.position);
                 view.SetGrowing(plantedMessage.Plant.Growing);
+                view.SetViewTransform(plantedMessage.Cell.transform);                  
             }
-        }
-
-        private void Awake()
-        {
-            
-            _mainCamera = Camera.main;
         }
 
         private void OnEnable()
