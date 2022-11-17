@@ -851,6 +851,7 @@ MonoBehaviour:
   m_DefautlValues:
     Position: {x: 0, y: 5.32, z: -2.36}
     Rotation: {x: 0.54280806, y: -0, z: -0, w: 0.8398568}
+  m_DefaultTarget: {fileID: 1805399597}
 --- !u!4 &1558537584
 Transform:
   m_ObjectHideFlags: 0
@@ -1090,6 +1091,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &1805399597 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3268531273862001022, guid: c45a45de9120eed4297fcc33085ab343, type: 3}
+  m_PrefabInstance: {fileID: 3268531273132443478}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1922563214
 GameObject:
   m_ObjectHideFlags: 0
